@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Beadandó Project</h1>
+        <form method="POST" action="http://localhost:8080/mavenprojecthtamas-1.0-SNAPSHOT/rest/halak/ar">        <select id="halak" name="halak"></select>
+        <select id="me" name="me"></select>
+        <input type="submit" >
+        </form>
+    </body>
+    <script>
+        var ajax = new XMLHttpRequest();
+        ajax.open("GET", "http://localhost:8080/mavenprojecthtamas-1.0-SNAPSHOT/rest/halak/osszes", true)
+        ajax.responseType = "json";
+        ajax.onload = function () {
+            for (var x in ajax.response) {
+                var option = document.createElement("OPTION")
+                option.value = ajax.response[x].id;
+                option.innerHTML = ajax.response[x].neve;
+                document.getElementById("halak").appendChild(option);
+            }
+        }
+        ajax.send();
+
+        var ajax0 = new XMLHttpRequest();
+        ajax0.open("GET", "http://localhost:8080/mavenprojecthtamas-1.0-SNAPSHOT/rest/halak/me", true)
+        ajax0.responseType = "json";
+        ajax0.onload = function () {
+            for (var x in ajax0.response) {
+                var option = document.createElement("OPTION")
+                option.value = ajax0.response[x].id;
+                option.innerHTML = ajax0.response[x].mennyiseg;
+                option.innerHTML += "("+ajax0.response[x].mertekegyseg;
+                
+                document.getElementById("me").appendChild(option);
+            }
+        }
+        ajax0.send();
+
+    </script>
+</html>
